@@ -1,2 +1,2 @@
 # streetfighter
-a street fighter 3 clone i made in cs while bored
+a street fighter 3 clone i am making in cs while bored
