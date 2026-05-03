@@ -7,9 +7,13 @@ class Player(pygame.sprite.Sprite):
         self.just_keys = None
         self.state = None
         self.image = pygame.Surface((50, 150))
-        self.image.fill("blue")
+        self.image.fill("#0300FF")
         self.rect = self.image.get_rect(center = (250, 300))
         self.SPEED = 300
+        self.GRAVITY = 1200
+        self.JUMP_HEIGHT = -500
+        self.can_jump = False
+        self.MAX_FALL_SPEED = 700
         self.velocity = pygame.math.Vector2(0,0)
 
     def state_machine(self):
@@ -43,10 +47,16 @@ class Player(pygame.sprite.Sprite):
 
     def input(self, dt):
         # walking
-        self.velocity.x = int(self.keys[pygame.K_RIGHT]) - int(self.keys[pygame.K_LEFT])
+        self.velocity.x = int(self.keys[pygame.K_d]) - int(self.keys[pygame.K_a])
         self.rect.x += self.velocity.x * self.SPEED * dt
+
+        # jumping and gravity
+        self.velocity.y += self.GRAVITY * dt
+        self.rect.y += self.velocity.y * dt
+        if "jumping" in self.state and self.can_jump: self.velocity.y = self.JUMP_HEIGHT; self.can_jump = False
+        if self.velocity.y >= self.MAX_FALL_SPEED: self.velocity.y = self.MAX_FALL_SPEED
 
     def run(self, dt):
         self.state_machine()
         self.input(dt)
-        print(self.state)
+        print(self.can_jump)
