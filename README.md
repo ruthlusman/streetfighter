@@ -2,5 +2,11 @@
 a street fighter 3 clone i am making in cs while bored
 
 ## to-do list
-- input buffer
+- jumping and other moves
+- ground
+- player 2
+- hitboxes and hurtboxes
+- health and damage system
+- round system
 - actual sprites and animation
+- input buffer
